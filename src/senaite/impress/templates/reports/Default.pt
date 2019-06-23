@@ -639,6 +639,9 @@
   <!-- DEFAULT FOOTER -->
   <tal:render condition="python:not footer"
               define="laboratory python:view.laboratory;">
+    
+    <div class="arresultsinterpretation-container"
+       tal:define="departments python:context.getDepartments()">
     <div class="row section-footer no-gutters">
       <!-- Footer Line -->
       <div id="footer-line"></div>
@@ -646,6 +649,9 @@
         <tr>
           <td>
             <div>
+         <strong tal:define="departments python:context.getDepartments()">
+   <tal:content="departments">Department>
+</strong>
               <strong tal:content="laboratory/Name">Lab Name</strong>
               • <span tal:content="laboratory/PhysicalAddress/address">Lab Street and Number</span>
               • <span tal:content="laboratory/PhysicalAddress/zip">Lab ZIP</span>

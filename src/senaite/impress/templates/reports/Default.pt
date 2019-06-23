@@ -646,7 +646,7 @@
         <tr>
           <td>
             <div>
-              <strong tal:content="bika-departments/title">Lab Name</strong>
+              <strong tal:content="laboratory/Name">Lab Name</strong>
               • <span tal:content="laboratory/PhysicalAddress/address">Lab Street and Number</span>
               • <span tal:content="laboratory/PhysicalAddress/zip">Lab ZIP</span>
                 <span tal:content="laboratory/PhysicalAddress/city">Lab City</span>

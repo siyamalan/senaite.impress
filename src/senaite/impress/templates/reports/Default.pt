@@ -206,36 +206,6 @@
                 <div class="lab-country">
                   <div tal:replace="laboratory/PostalAddress/country|nothing"></div>
                 </div>
-                
-                
-                           <tal:manager repeat="manager python:model.managers">
-              <td style="border:none">
-                <div>
-                  <img tal:condition="manager/Signature"
-                       tal:attributes="src string:${manager/absolute_url}/Signature" style="height:75px"/>
-                </div>
-                <div class="font-weight-bold">
-                  <span tal:content="manager/Salutation"></span>
-                  <span tal:condition="manager/Salutation">&nbsp;</span>
-                  <span tal:content="manager/Fullname"></span>
-                </div>
-                <div>
-                  <span tal:content="manager/JobTitle"></span>
-                </div>
-                 <div>
-                  <span tal:content="manager/PhysicalAddress"></span>
-                </div>
-                 <div>
-                  <span tal:content="manager/JobTitle"></span>
-                </div
-                <div>
-                  <span tal:content="manager/DefaultDepartment"></span>
-                </div>
-              </td>
-            </tal:manager>
-                
-                
-                
               </div>
               <div class="lab-url">
                 <a tal:attributes="href laboratory/LabURL"
@@ -586,7 +556,7 @@
                   <span tal:content="manager/JobTitle"></span>
                 </div>
                 <div>
-                  <span tal:content="manager/DefaultDepartment/title|nothing"></span>
+                  <span tal:content="manager/DefaultDepartment"></span>
                 </div>
               </td>
             </tal:manager>
@@ -676,8 +646,6 @@
         <tr>
           <td>
             <div>
-         <strong tal:define="departments python:context.getDepartments()">
-   <tal:content="departments">Department</strong>
               <strong tal:content="laboratory/Name">Lab Name</strong>
               • <span tal:content="laboratory/PhysicalAddress/address">Lab Street and Number</span>
               • <span tal:content="laboratory/PhysicalAddress/zip">Lab ZIP</span>

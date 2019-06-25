@@ -557,8 +557,16 @@
                 </div>
                 <div>
                   <span tal:content="manager/PhysicalAddress"></span>
+                               
+              • <span tal:content="manager/PhysicalAddress/address">Lab Street and Number</span>
+              • <span tal:content="manager/PhysicalAddress/zip">Lab ZIP</span>
+                <span tal:content="manager/PhysicalAddress/city">Lab City</span>
+              • <span tal:content="manager/PhysicalAddress/country">Lab Country</span>
                 </div>
               </td>
+               
+              
+              
             </tal:manager>
             <tal:reporter define="reporter python:view.current_user" condition="reporter">
               <td style="border:none">

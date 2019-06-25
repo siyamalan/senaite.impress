@@ -144,18 +144,16 @@
       <table class="table table-sm table-condensed w-100">
         <colgroup>
           <!-- Client Address -->
-          <col style="width: 40%;">
+          <col style="width: 50%;">
           <!-- Lab Address -->
-          <col style="width: 40%">
+          <col style="width: 50%">
           <!-- Accreditation Logo -->
-          <col style="width: 20%">
+          
         </colgroup>
         <tr>
           <td>
 
-              <div class="font-weight-bold">
-                <h1 i18n:translate="">Client</h1> 
-              </div>
+              
              <address class="client-address">
               <div class="client-name font-weight">
                 <div tal:replace="client/Name|nothing"></div>
@@ -192,7 +190,7 @@
             
             <address class="laboratory-address">
                <div class="font-weight-bold">
-                <h1 i18n:translate="">Lab Department</h1> 
+                <h1 i18n:translate="">Report By:</h1> 
               </div>
               
                  <tal:manager repeat="manager python:model.managers">
@@ -223,21 +221,7 @@
               </div>
             </address>
           </td>
-          <td>
-            <div class="accreditation-logo text-left"
-                 tal:define="accredited laboratory/LaboratoryAccredited;
-                             accreditation_logo laboratory/AccreditationBodyLogo"
-                 tal:condition="accredited">
-              <img class="img-fluid"
-                   style="max-width:200px;"
-                   tal:condition="accreditation_logo"
-                   tal:attributes="src accreditation_logo/absolute_url"/>
-              <img class="img-fluid"
-                   style="max-width:200px;"
-                   tal:condition="not:accreditation_logo"
-                   tal:attributes="src python:view.get_resource_url('AccreditationBodyLogo.png', prefix='bika.lims.images')"/>
-            </div>
-          </td>
+           
         </tr>
       </table>
     </div>
@@ -437,6 +421,13 @@
                             tal:content="structure python:model.get_formatted_uncertainty(analysis)"></span>
                       <span tal:content="python:'(RT)' if model.is_retest(analysis) else ''"></span>
                       <span tal:content="python:model.get_formatted_specs(analysis)">50 - 60</span>
+                      
+                      <div tal_define="results_range python:analysis.get('specs',{});
+                 range_comment python:results_range.get('rangecomment', '');"
+ tal:condition="python: analysis.get('outofrange', False) and range_comment"
+ tal:content="range_comment">
+</div>
+                      
                     </td>
                     <td class="text-center align-middle">
                       <span tal:condition="python:model.is_out_of_range(analysis)"

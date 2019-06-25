@@ -556,7 +556,7 @@
                   <span tal:content="manager/JobTitle"></span>
                 </div>
                 <div>
-                  <span tal:content="manager/DefaultDepartment"></span>
+                  <span tal:content="DefaultDepartment manager/DefaultDepartment"></span>
                 </div>
               </td>
             </tal:manager>

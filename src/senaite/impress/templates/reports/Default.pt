@@ -185,8 +185,15 @@
           </td>
           <td>
             <!-- Laboratory Info -->
+            
+                       
+            
+            
             <address class="laboratory-address">
               <div class="lab-title font-weight-bold">
+                 <tal:manager repeat="manager python:model.managers">
+              <span tal:content="manager/PhysicalAddress/address">Address</span> 
+            </tal:manager>
                 <div tal:replace="laboratory/title|nothing"/>
               </div>
               <div class="lab-supervisor" tal:condition="laboratory/Supervisor">
@@ -542,6 +549,7 @@
         <table class="table table-sm table-condensed">
           <tr>
             <tal:manager repeat="manager python:model.managers">
+              
               <td style="border:none">
                 <div>
                   <img tal:condition="manager/Signature"
@@ -556,17 +564,9 @@
                   <span tal:content="manager/JobTitle"></span>
                 </div>
                 <div>
-                  <span tal:content="manager/PhysicalAddress"></span>
-                               
-              • <span tal:content="manager/PhysicalAddress/address">Lab Street and Number</span>
-              • <span tal:content="manager/PhysicalAddress/zip">Lab ZIP</span>
-                <span tal:content="manager/PhysicalAddress/city">Lab City</span>
-              • <span tal:content="manager/PhysicalAddress/country">Lab Country</span>
+                  <span tal:content="manager/DefaultDepartment/title|nothing"></span>
                 </div>
               </td>
-               
-              
-              
             </tal:manager>
             <tal:reporter define="reporter python:view.current_user" condition="reporter">
               <td style="border:none">

@@ -14,6 +14,7 @@
           page_height options/page_height|nothing;
           content_width options/content_width|nothing;
           content_height options/content_height|nothing;">
+
   <!-- Custom Report Controls -->
   <div id="controls" class="noprint">
     <div i18n:translate="" class="text-secondary mb-2">Custom Report Options</div>
@@ -43,22 +44,9 @@
    console.log(window.options);
    console.info("######################################################################");
   </script>
-  
-    <tal:css>
+
+  <tal:css>
     <style type="text/css">
-      div[class="row"] {
-    outline: 1px solid;
-}
-
-div[class^="col-"] {
-    outline: 1px solid;
-} 
-
-
-.logo{
-  height:50px;
-  margin:40px;
-}
      .report * { font: 9pt; }
      .report h1 { font-size: 140%; }
      .report h2 { font-size: 120%; }
@@ -120,9 +108,8 @@ div[class^="col-"] {
      }
     </style>
   </tal:css>
-  
 
-<!-- HEADER -->
+  <!-- HEADER -->
 <tal:render condition="python:True">
 <div class="row">
   
@@ -137,62 +124,226 @@ div[class^="col-"] {
  
 </div>
 </tal:render>
-<!-- /HEADER -->
+  <!-- /HEADER -->
+
+  <!-- INFO -->
+  <tal:render condition="python:True">
+  <div class="row section-info no-gutters">
+    <div class="w-100">
+      <!-- Client Info -->
+      <table class="table table-sm table-condensed w-100">
+        <colgroup>
+          <!-- Client Address -->
+          <col style="width: 50%;">
+          <!-- Lab Address -->
+          <col style="width: 50%">
+          <!-- Accreditation Logo -->
+          
+        </colgroup>
+        <tr>
+          <td>
+
+              
+             <address class="client-address">
+              <div class="client-name font-weight">
+                <div tal:replace="client/Name|nothing"></div>
+              </div>
+              <div class="client-street">
+                <div tal:replace="client/PostalAddress/address|nothing"></div>
+              </div>
+              <span class="client-zip">
+                <div tal:replace="client/PostalAddress/zip|nothing"></div>
+              </span>
+              <span class="client-city">
+                <div tal:replace="client/PostalAddress/city|nothing"></div>
+              </span>
+              <div class="client-country">
+                <div tal:replace="client/PostalAddress/country|nothing"></div>
+              </div>
+              <div class="contact-email">
+                <a tal:content="contact/EmailAddress|nothing"
+                   tal:attributes="href string:mailto:${contact/EmailAddress}"></a>
+              </div>
+              <div class="contact-phone">
+                <div tal:replace="contact/Phone|nothing"></div>
+              </div>
+              <div class="contact-fax">
+                <div tal:replace="contact/Fax|nothing"></div>
+              </div>
+            </address>
+          </td>
+          <td>
+            <!-- Laboratory Info -->
+            
+                       
+            
+            
+            <address class="laboratory-address">
+               <div class="font-weight-bold">
+                <h1 i18n:translate="">Report By:</h1> 
+              </div>
+              
+                 <tal:manager repeat="manager python:model.managers">
+                   <div class="lab-title">
+              <span tal:content="manager/PhysicalAddress/address">Address</span> 
+            
+                
+              </div>
   
-  
-<!-- INFO -->
-<tal:render condition="python:True">
-<div class="row">
-  
-        <div class="col-sm-8 text-center font-weight-bold"><h4 i18n:translate="">PRW LIMS Report</h4></div>
-        <div class="col-sm-4 text-center font-weight-bold">BAR CODE</div>
-  
- 
-        <div class="col-sm-5">Client Info</div>
-  
-  
-  
-  
-        <div class="col-sm-7">
-            <div class="row"> Analysis Status</div>
-            <div class="row"> Provisional/Final report</div>
+              <div class="lab-address">
+                <div class="lab-city">
+                  <div tal:content="manager/PhysicalAddress/city|nothing">Lab City></div>
+                </div>
+                <span class="lab-state">
+                  <div  tal:content="manager/PhysicalAddress/state|nothing">Lab State></div>
+                </span>
+                <span class="lab-city">
+                  <div tal:content="manager/PhysicalAddress/zip|nothing">Lab ZIP></div>
+                </span>
+                <div class="lab-country">
+                  <div tal:content="manager/PhysicalAddress/country|nothing">Lab Country</div>
+                </div>
+              </div>
+                   </tal:manager>
+              <div class="lab-url">
+                <a tal:attributes="href laboratory/LabURL"
+                   tal:content="laboratory/LabURL"></a>
+              </div>
+            </address>
+          </td>
+           
+        </tr>
+      </table>
+    </div>
+    <!-- Clear Floats
+         https://github.com/Kozea/WeasyPrint/issues/36
+    -->
+    <div class="clearfix"></div>
+  </div>
+  </tal:render>
+
+  <!-- ALERTS -->
+  <tal:render condition="python:True">
+    <div class="row section-alerts no-gutters">
+      <div class="w-100 mb-2">
+        <div class="alert alert-danger" tal:condition="model/is_invalid">
+          <div i18n:translate="">This Analysis Request has been invalidated due to erroneously published results</div>
+          <tal:invalidreport tal:define="child model/Retest"
+                             tal:condition="child">
+            <span i18n:translate="">This Analysis request has been replaced by</span>
+            <a tal:attributes="href child/absolute_url"
+               tal:content="child/getId"></a>
+          </tal:invalidreport>
         </div>
-        <div class="col-sm-2 font-weight-bold">Lab Reference:</div> 
-        <div class="col-sm-2">TAM-0023232</div>
-        <div class="col-sm-2 font-weight-bold">Laboratory</div>
-        <div class="col-sm-2">Auckland</div>
-        <div class="col-sm-2 font-weight-bold">Client</div>
-        <div class="col-sm-2">Tamaki Winery</div>
-        <div class="col-sm-2 font-weight-bold">Tank Number:</div>
-        <div class="col-sm-2">J10</div>
-        <div class="col-sm-2 font-weight-bold">Blend ID:</div>
-        <div class="col-sm-2">BVSBLS B302 2018</div>
-        <div class="col-sm-2 font-weight-bold">Specification:</div>
-        <div class="col-sm-2">BVSBLS B300 2018</div>
-        <div class="col-sm-2 font-weight-bold">Data Received:</div>
-        <div class="col-sm-2">03/07/2019 14:32</div>
-        <div class="col-sm-2 font-weight-bold">Date Verified:</div>
-        <div class="col-sm-2">04/07/2019 21:15</div>
-        <div class="col-sm-2 font-weight-bold">Date Published:</div>
-        <div class="col-sm-2">04/07/2019 21:17</div>
-      
-      
-             <div class="col-sm-2 font-weight-bold">Batch ID:</div>
-        <div class="col-sm-2">BAT-3243243</div>
-        <div class="col-sm-2 font-weight-bold">Client Batch SID:</div>
-        <div class="col-sm-2">CBAT-3242343</div>
-        <div class="col-sm-2 font-weight-bold">Sample Type:</div>
-        <div class="col-sm-2">White Wine</div>     
-      
-         <!-- RESULTS -->
-        <div class="col-sm-12 font-weight-bold">        <h1 i18n:translate="">Summary</h1></div> 
-      
-<div class="col-sm-12 font-weight-bold">
-      
- <!-- RESULTS -->
-<tal:render condition="python:True">
-  
- <!-- Point of Capture -->
+        <div class="alert alert-info" tal:condition="model/is_provisional">
+          <div i18n:translate="">Provisional report</div>
+        </div>
+      </div>
+    </div>
+  </tal:render>
+
+  <!-- SUMMARY -->
+  <tal:render condition="python:True"
+              define="client model/Client;
+                      batch model/Batch;
+                      reporter python:view.current_user;
+                      specification model/Specification;
+                      publication_specification model/PublicationSpecification;
+                      spec python:publication_specification or specification;">
+    <div class="row section-summary no-gutters">
+      <div class="w-100">
+
+        <!-- Barcode -->
+        <div class="text-center float-right barcode-container">
+          <div class="barcode"
+               data-code="code128"
+               data-showHRI="true"
+               data-barHeight="15"
+               data-addQuietZone="true"
+               tal:attributes="data-id model/getId">
+          </div>
+        </div>
+
+        <h1 i18n:translate="">Summary</h1>
+        <table class="table table-sm table-condensed">
+          <tr>
+            <td style="width:20%" class="label" i18n:translate="">Sample ID</td>
+            <td>
+              <a tal:content="model/getId"
+                 tal:attributes="href model/absolute_url;">
+              </a>
+            </td>
+          </tr>
+          <tr tal:condition="batch">
+            <td class="label" i18n:translate="">Batch ID</td>
+            <td>
+              <a tal:content="batch/getId"
+                 tal:attributes="href batch/absolute_url">
+              </a>
+            </td>
+          </tr>
+          <tr tal:condition="batch">
+            <td class="label" i18n:translate="">Client Batch ID</td>
+            <td tal:content="batch/ClientBatchID"></td>
+          </tr>
+          <tr>
+            <td class="label" i18n:translate="">Client</td>
+            <td>
+              <a tal:attributes="href client/absolute_url"
+                 tal:content="client/Name"></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="label" i18n:translate="">Client SID</td>
+            <td tal:content="model/ClientSampleID"></td>
+          </tr>
+          <tr>
+            <td class="label" i18n:translate="">Sample Type</td>
+            <td tal:content="model/SampleType/title|nothing"></td>
+          </tr>
+          <tr>
+            <td class="label" i18n:translate="">Specification</td>
+            <td tal:content="spec/contextual_title|nothing"></td>
+          </tr>
+          <tr>
+            <td class="label" i18n:translate="">Date Received</td>
+            <td tal:content="python:view.to_localized_time(model.DateReceived)"></td>
+          </tr>
+          <tr>
+            <td class="label" i18n:translate="">Date Verified</td>
+            <td tal:content="python:view.to_localized_time(model.get_transition_date('bika_ar_workflow', 'verified'))"></td>
+          </tr>
+          <tr>
+            <td class="label" i18n:translate="">Date Published</td>
+            <td tal:content="python:view.to_localized_time(view.timestamp)"></td>
+          </tr>
+          <tr tal:condition="reporter">
+            <td class="label" i18n:translate="">Published by</td>
+            <td>
+              <span tal:content="reporter/fullname|reporter/username"/>
+              <tal:email tal:condition="reporter/email|nothing"
+                         tal:define="email reporter/email|nothing">
+                (<a tal:content="email"
+                    tal:attributes="href string:mailto:${email}"></a>)
+              </tal:email>
+            </td>
+          </tr>
+          <tr tal:condition="python: batch and batch.BatchLabels">
+            <td class="label" i18n:translate="">Batch Labels</td>
+            <td tal:content="structure python:', '.join(batch.BatchLabels)"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </tal:render>
+
+  <!-- RESULTS -->
+  <tal:render condition="python:True">
+    <div class="row section-results no-gutters">
+      <div class="w-100">
+        <h1 i18n:translate="">Results</h1>
+
+        <!-- Point of Capture -->
         <tal:poc define="analyses_by_poc python:view.get_analyses_by_poc(model);"
                  repeat="poc analyses_by_poc">
 
@@ -510,22 +661,5 @@ div[class^="col-"] {
       </table>
     </div>
   </tal:render>
-      
-      
-      
-      
-  
-    </div> 
-</div>
- 
-
-
 
 </tal:report>
-
-
-
-
-
- 
-              

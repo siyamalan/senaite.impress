@@ -254,33 +254,32 @@
     
     
     
-       <div class="row">
-        <div class="col-sm-2 font-weight-bold">Lab Reference:</div> 
-        <div class="col-sm-2">TAM-0023232</div>
-        <div class="col-sm-2 font-weight-bold">Laboratory</div>
-        <div class="col-sm-2">Auckland</div>
-        <div class="col-sm-2 font-weight-bold">Client</div>
-        <div class="col-sm-2">Tamaki Winery</div>
-        <div class="col-sm-2 font-weight-bold">Tank Number:</div>
-        <div class="col-sm-2">J10</div>
-        <div class="col-sm-2 font-weight-bold">Blend ID:</div>
-        <div class="col-sm-2">BVSBLS B302 2018</div>
-        <div class="col-sm-2 font-weight-bold">Specification:</div>
-        <div class="col-sm-2">BVSBLS B300 2018</div>
-        <div class="col-sm-2 font-weight-bold">Data Received:</div>
-        <div class="col-sm-2">03/07/2019 14:32</div>
-        <div class="col-sm-2 font-weight-bold">Date Verified:</div>
-        <div class="col-sm-2">04/07/2019 21:15</div>
-        <div class="col-sm-2 font-weight-bold">Date Published:</div>
-        <div class="col-sm-2">04/07/2019 21:17</div>
-        <div class="col-sm-2 font-weight-bold">Batch ID:</div>
-        <div class="col-sm-2">BAT-3243243</div>
-        <div class="col-sm-2 font-weight-bold">Client Batch SID:</div>
-        <div class="col-sm-2">CBAT-3242343</div>
-        <div class="col-sm-2 font-weight-bold">Sample Type:</div>
-        <div class="col-sm-2">White Wine</div>  
+ <div class="row">
+        <div class="col-sm-2 border border-right-0 small font-weight-bold">Lab Reference:</div> 
+        <div class="col-sm-2 border border-left-0 small">TAM-0023232</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Laboratory</div>
+        <div class="col-sm-2 border border-left-0 small">Auckland</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Client</div>
+        <div class="col-sm-2 border border-left-0 small">Tamaki Winery</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Tank Number:</div>
+        <div class="col-sm-2 border border-left-0 small">J10</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Blend ID:</div>
+        <div class="col-sm-2 border border-left-0 small">BVSBLS B302 2018</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Specification:</div>
+        <div class="col-sm-2 border border-left-0 small">BVSBLS B300 2018</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Data Received:</div>
+        <div class="col-sm-2 border border-left-0 small">03/07/2019 14:32</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Date Verified:</div>
+        <div class="col-sm-2 border border-left-0 small">04/07/2019 21:15</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Date Published:</div>
+        <div class="col-sm-2 border border-left-0 small">04/07/2019 21:17</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Batch ID:</div>
+        <div class="col-sm-2 border border-left-0 small">BAT-3243243</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Client Batch SID:</div>
+        <div class="col-sm-2 border border-left-0 small">CBAT-3242343</div>
+        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Sample Type:</div>
+        <div class="col-sm-2 border border-left-0 small">White Wine</div>  
     </div>
-    
     
     
     

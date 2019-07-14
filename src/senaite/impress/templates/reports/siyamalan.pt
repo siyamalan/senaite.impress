@@ -261,7 +261,7 @@
   <!-- SUMMARY -->
   <tal:render condition="python:True"
               define="client model/Client;
-                      batch model/Batch;
+                      batch model/Batch;       
                       reporter python:view.current_user;
                       specification model/Specification;
                       publication_specification model/PublicationSpecification;
@@ -328,9 +328,14 @@
       </div>
     </div>
   </tal:render>
-
+<div>sdafdsdfs</div><div>sdafdsdfs</div><div>sdafdsdfs</div>
   <!-- RESULTS -->
-  <tal:render condition="python:True">
+    <tal:render condition="python:True"
+              define="specification model/Specification;
+                      publication_specification model/PublicationSpecification;
+                      spec python:publication_specification or specification;
+                      specs python:publication_specification or specification;">
+  
     <div class="row section-results no-gutters">
       <div class="w-100">
         <h1 i18n:translate="">Results</h1>

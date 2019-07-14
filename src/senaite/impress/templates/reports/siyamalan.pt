@@ -312,24 +312,17 @@
         <div class="col-sm-3 border-dark border-bottom" tal:content="python:view.to_localized_time(model.DateReceived)"></div>   
         <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Date Published</div> 
         <div class="col-sm-3 border-dark border-bottom" tal:content="python:view.to_localized_time(view.timestamp)"></div> 
-   
-   
         <div tal:condition="reporter" class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Published by</div> 
         <div class="col-sm-3 border-dark border-bottom"> <span tal:content="reporter/fullname|reporter/username"/>
               <tal:email tal:condition="reporter/email|nothing"
                          tal:define="email reporter/email|nothing">
                 (<a tal:content="email"
                     tal:attributes="href string:mailto:${email}"></a>)
-              </tal:email>
-          
-   </div>       
+              </tal:email> 
+        </div>       
         <div tal:condition="python: batch and batch.BatchLabels" class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Batch Labels</div> 
-        <div class="col-sm-3 border-dark border-bottom" tal:content="structure python:', '.join(batch.BatchLabels)"></div> 
- 
-   
-   
-   
-    </div> 
+        <div tal:condition="python: batch and batch.BatchLabels" class="col-sm-3 border-dark border-bottom" tal:content="structure python:', '.join(batch.BatchLabels)"></div> 
+        </div> 
         
 
       </div>

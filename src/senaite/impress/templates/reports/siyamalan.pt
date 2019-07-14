@@ -320,7 +320,7 @@
                          tal:define="email reporter/email|nothing">
                 (<a tal:content="email"
                     tal:attributes="href string:mailto:${email}"></a>)
-              </tal:email></span>
+              </tal:email>
           
    </div>       
         <div tal:condition="python: batch and batch.BatchLabels" class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Batch Labels</div> 

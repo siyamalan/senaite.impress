@@ -279,16 +279,25 @@
                tal:attributes="data-id model/getId">
           </div>
         </div>
+        
+        <div class="mx-auto" style="width: 200px;">
+  Temperory spacing
+</div>
 
         <h1 i18n:translate="">Summary</h1>
         
  <div class="row">
-        <div class="col-sm-3 border border-light border-right-0 label" i18n:translate="">Sample ID</div> 
+        <div class="col-sm-3 font-weight-bold border border-light border-right-0 label" i18n:translate="">Sample ID</div> 
         <div class="col-sm-3 border border-light border-left-0"><a tal:content="model/getId"
-                 tal:attributes="href model/absolute_url;">
-              </a></div>
-        <div class="col-sm-3 border border-light border-right-0 ">Laboratory</div>
-        <div class="col-sm-3 border border-light border-left-0">Auckland</div>
+             tal:attributes="href model/absolute_url;"></a></div>
+   
+        <div tal:condition="batch" class="col-sm-3 font-weight-bold border border-light border-right-0 label" i18n:translate="">Batch ID</div>
+        <div tal:condition="batch" class="col-sm-3 border border-light border-left-0"><a tal:content="batch/getId"
+             tal:attributes="href batch/absolute_url"></a></div>
+   
+        <div tal:condition="batch" class="col-sm-3 font-weight-bold border border-light border-right-0 label" i18n:translate="">Client Batch ID</div>
+        <div tal:condition="batch" class="col-sm-3 border border-light border-left-0" tal:content="batch/ClientBatchID"></div>
+   
         <div class="col-sm-3 border border-light border-right-0 ">Client</div>
         <div class="col-sm-3 border border-light border-left-0">Tamaki Winery</div>
         <div class="col-sm-3 border border-light border-right-0 ">Tank Number:</div>
@@ -317,14 +326,7 @@
         
         <table class="table table-sm table-condensed">
          
-          <tr tal:condition="batch">
-            <td class="label" i18n:translate="">Batch ID</td>
-            <td>
-              <a tal:content="batch/getId"
-                 tal:attributes="href batch/absolute_url">
-              </a>
-            </td>
-          </tr>
+         
           <tr tal:condition="batch">
             <td class="label" i18n:translate="">Client Batch ID</td>
             <td tal:content="batch/ClientBatchID"></td>

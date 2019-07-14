@@ -64,7 +64,7 @@
      .report table th { border-bottom: 1px solid black; }
      .report table.range-table td { padding: 0 0.3rem 0 0; border: none; }
      .report .section-header h1 { font-size: 175%; }
-     .report .section-header img.logo { height: 50px; margin: 20px 0; }
+     .report .section-header img.logo { height: 100px; margin: 20px 0; }
      .report .barcode-hri { margin-top: -0.25em; font-size: 8pt; }
      .report .section-footer table td { border: none; }
      .report .section-footer {
@@ -110,20 +110,30 @@
   </tal:css>
 
   <!-- HEADER -->
-<tal:render condition="python:True">
-<div class="row">
-  
-        <!-- Header Table -->
-        <div class="col-sm-3">
-        <!-- Header Left -->
-        <img class="logo"
+  <tal:render condition="python:True">
+    <div class="row section-header no-gutters">
+      <!-- Header Table -->
+      <div class="w-100 mb-2">
+        <table class="w-100 mb-0 noborder">
+          <colgroup>
+            <col style="width:50%"/>
+            <col style="width:50%;"/>
+          </colgroup>
+          <tr>
+            <!-- Header Left -->
+            <td class="align-middle text-left">
+              <h1 i18n:translate="">Analysis Report</h1>
+            </td>
+            <!-- Header Right -->
+            <td class="align-middle text-right">
+              <img class="logo"
                    tal:attributes="src python:view.get_resource_url('logo_print.png')"/>
-        </div>
-        <!-- Header Right -->
-        <div class="col-sm-9">Address </div>
- 
-</div>
-</tal:render>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </tal:render>
   <!-- /HEADER -->
 
   <!-- INFO -->
@@ -134,19 +144,20 @@
       <table class="table table-sm table-condensed w-100">
         <colgroup>
           <!-- Client Address -->
-          <col style="width: 50%;">
+          <col style="width: 40%;">
           <!-- Lab Address -->
-          <col style="width: 50%">
+          <col style="width: 40%">
           <!-- Accreditation Logo -->
-          
+          <col style="width: 20%">
         </colgroup>
         <tr>
           <td>
-
-              
-             <address class="client-address">
-              <div class="client-name font-weight">
+            <address class="client-address">
+              <div class="client-name font-weight-bold">
                 <div tal:replace="client/Name|nothing"></div>
+              </div>
+              <div class="contact-fullname">
+                <div tal:replace="contact/Fullname|nothing"></div>
               </div>
               <div class="client-street">
                 <div tal:replace="client/PostalAddress/address|nothing"></div>
@@ -174,44 +185,49 @@
           </td>
           <td>
             <!-- Laboratory Info -->
-            
-                       
-            
-            
             <address class="laboratory-address">
-               <div class="font-weight-bold">
-                <h1 i18n:translate="">Report By:</h1> 
+              <div class="lab-title font-weight-bold">
+                <div tal:replace="laboratory/title|nothing"/>
               </div>
-              
-                 <tal:manager repeat="manager python:model.managers">
-                   <div class="lab-title">
-              <span tal:content="manager/PhysicalAddress/address">Address</span> 
-            
-                
+              <div class="lab-supervisor" tal:condition="laboratory/Supervisor">
+                <span i18n:translate="">Supervisor</span>:
+                <div tal:replace="laboratory/Supervisor/Fullname|nothing"/>
               </div>
-  
               <div class="lab-address">
-                <div class="lab-city">
-                  <div tal:content="manager/PhysicalAddress/city|nothing">Lab City></div>
+                <div class="lab-street">
+                  <div tal:replace="laboratory/PostalAddress/address|nothing"></div>
                 </div>
-                <span class="lab-state">
-                  <div  tal:content="manager/PhysicalAddress/state|nothing">Lab State></div>
+                <span class="lab-zip">
+                  <div tal:replace="laboratory/PostalAddress/zip|nothing"></div>
                 </span>
                 <span class="lab-city">
-                  <div tal:content="manager/PhysicalAddress/zip|nothing">Lab ZIP></div>
+                  <div tal:replace="laboratory/PostalAddress/city|nothing"></div>
                 </span>
                 <div class="lab-country">
-                  <div tal:content="manager/PhysicalAddress/country|nothing">Lab Country</div>
+                  <div tal:replace="laboratory/PostalAddress/country|nothing"></div>
                 </div>
               </div>
-                   </tal:manager>
               <div class="lab-url">
                 <a tal:attributes="href laboratory/LabURL"
                    tal:content="laboratory/LabURL"></a>
               </div>
             </address>
           </td>
-           
+          <td>
+            <div class="accreditation-logo text-left"
+                 tal:define="accredited laboratory/LaboratoryAccredited;
+                             accreditation_logo laboratory/AccreditationBodyLogo"
+                 tal:condition="accredited">
+              <img class="img-fluid"
+                   style="max-width:200px;"
+                   tal:condition="accreditation_logo"
+                   tal:attributes="src accreditation_logo/absolute_url"/>
+              <img class="img-fluid"
+                   style="max-width:200px;"
+                   tal:condition="not:accreditation_logo"
+                   tal:attributes="src python:view.get_resource_url('AccreditationBodyLogo.png', prefix='bika.lims.images')"/>
+            </div>
+          </td>
         </tr>
       </table>
     </div>
@@ -250,43 +266,6 @@
                       specification model/Specification;
                       publication_specification model/PublicationSpecification;
                       spec python:publication_specification or specification;">
-    
-    
-    
-    
- <div class="row">
-        <div class="col-sm-2 border border-right-0 small font-weight-bold">Lab Reference:</div> 
-        <div class="col-sm-2 border border-left-0 small">TAM-0023232</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Laboratory</div>
-        <div class="col-sm-2 border border-left-0 small">Auckland</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Client</div>
-        <div class="col-sm-2 border border-left-0 small">Tamaki Winery</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Tank Number:</div>
-        <div class="col-sm-2 border border-left-0 small">J10</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Blend ID:</div>
-        <div class="col-sm-2 border border-left-0 small">BVSBLS B302 2018</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Specification:</div>
-        <div class="col-sm-2 border border-left-0 small">BVSBLS B300 2018</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Data Received:</div>
-        <div class="col-sm-2 border border-left-0 small">03/07/2019 14:32</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Date Verified:</div>
-        <div class="col-sm-2 border border-left-0 small">04/07/2019 21:15</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Date Published:</div>
-        <div class="col-sm-2 border border-left-0 small">04/07/2019 21:17</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Batch ID:</div>
-        <div class="col-sm-2 border border-left-0 small">BAT-3243243</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Client Batch SID:</div>
-        <div class="col-sm-2 border border-left-0 small">CBAT-3242343</div>
-        <div class="col-sm-2 border border-right-0 small font-weight-bold small font-weight-bold">Sample Type:</div>
-        <div class="col-sm-2 border border-left-0 small">White Wine</div>  
-    </div>
-    
-    
-    
-    
-    
-    
-    
     <div class="row section-summary no-gutters">
       <div class="w-100">
 
@@ -302,15 +281,42 @@
         </div>
 
         <h1 i18n:translate="">Summary</h1>
-        <table class="table table-sm table-condensed">
-          <tr>
-            <td style="width:20%" class="label" i18n:translate="">Sample ID</td>
-            <td>
-              <a tal:content="model/getId"
+        
+ <div class="row">
+        <div class="col-sm-3 border border-light border-right-0 label" i18n:translate="">Sample ID</div> 
+        <div class="col-sm-3 border border-light border-left-0"><a tal:content="model/getId"
                  tal:attributes="href model/absolute_url;">
-              </a>
-            </td>
-          </tr>
+              </a></div>
+        <div class="col-sm-3 border border-light border-right-0 ">Laboratory</div>
+        <div class="col-sm-3 border border-light border-left-0">Auckland</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Client</div>
+        <div class="col-sm-3 border border-light border-left-0">Tamaki Winery</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Tank Number:</div>
+        <div class="col-sm-3 border border-light border-left-0">J10</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Blend ID:</div>
+        <div class="col-sm-3 border border-light border-left-0">BVSBLS B302 2018</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Specification:</div>
+        <div class="col-sm-3 border border-light border-left-0">BVSBLS B300 2018</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Data Received:</div>
+        <div class="col-sm-3 border border-light border-left-0">03/07/2019 14:32</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Date Verified:</div>
+        <div class="col-sm-3 border border-light border-left-0">04/07/2019 21:15</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Date Published:</div>
+        <div class="col-sm-3 border border-light border-left-0">04/07/2019 21:17</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Batch ID:</div>
+        <div class="col-sm-3 border border-light border-left-0">BAT-3243243</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Client Batch SID:</div>
+        <div class="col-sm-3 border border-light border-left-0">CBAT-3242343</div>
+        <div class="col-sm-3 border border-light border-right-0 ">Sample Type:</div>
+        <div class="col-sm-3 border border-light border-left-0">White Wine</div>  
+    </div>
+        
+        
+        
+        
+        
+        <table class="table table-sm table-condensed">
+         
           <tr tal:condition="batch">
             <td class="label" i18n:translate="">Batch ID</td>
             <td>
@@ -448,13 +454,6 @@
                             tal:content="structure python:model.get_formatted_uncertainty(analysis)"></span>
                       <span tal:content="python:'(RT)' if model.is_retest(analysis) else ''"></span>
                       <span tal:content="python:model.get_formatted_specs(analysis)">50 - 60</span>
-                      
-                      <div tal_define="results_range python:analysis.get('specs',{});
-                 range_comment python:results_range.get('rangecomment', '');"
- tal:condition="python: analysis.get('outofrange', False) and range_comment"
- tal:content="range_comment">
-</div>
-                      
                     </td>
                     <td class="text-center align-middle">
                       <span tal:condition="python:model.is_out_of_range(analysis)"
@@ -570,7 +569,6 @@
         <table class="table table-sm table-condensed">
           <tr>
             <tal:manager repeat="manager python:model.managers">
-              
               <td style="border:none">
                 <div>
                   <img tal:condition="manager/Signature"

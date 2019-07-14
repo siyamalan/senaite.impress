@@ -282,102 +282,56 @@
         
         <div class="mx-auto" style="width: 200px;">
   Temperory spacing
+</div>   <div class="mx-auto" style="width: 200px;">
+  Temperory spacing
 </div>
 
         <h1 i18n:translate="">Summary</h1>
         
  <div class="row">
-        <div class="col-sm-3 font-weight-bold border border-light border-right-0 label" i18n:translate="">Sample ID</div> 
-        <div class="col-sm-3 border border-light border-left-0"><a tal:content="model/getId"
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Sample ID</div> 
+        <div class="col-sm-3 border-dark border-bottom"><a tal:content="model/getId"
              tal:attributes="href model/absolute_url;"></a></div>
-   
-        <div tal:condition="batch" class="col-sm-3 font-weight-bold border border-light border-right-0 label" i18n:translate="">Batch ID</div>
-        <div tal:condition="batch" class="col-sm-3 border border-light border-left-0"><a tal:content="batch/getId"
+        <div tal:condition="batch" class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Batch ID</div>
+        <div tal:condition="batch" class="col-sm-3 border-dark border-bottom"><a tal:content="batch/getId"
              tal:attributes="href batch/absolute_url"></a></div>
+        <div tal:condition="batch" class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Client Batch ID</div>
+        <div tal:condition="batch" class="col-sm-3 border-dark border-bottom" tal:content="batch/ClientBatchID"></div>
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Client</div> 
+        <div class="col-sm-3 border-dark border-bottom"><a tal:attributes="href client/absolute_url"
+                 tal:content="client/Name"></a></div>
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Client SID</div> 
+        <div class="col-sm-3 border-dark border-bottom" tal:content="model/ClientSampleID"></div>
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Sample Type</div> 
+        <div class="col-sm-3 border-dark border-bottom" tal:content="model/SampleType/title|nothing"></div>
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Specification</div> 
+        <div class="col-sm-3 border-dark border-bottom"  tal:content="spec/contextual_title|nothing"></div>
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Date Received</div> 
+        <div class="col-sm-3 border-dark border-bottom" tal:content="python:view.to_localized_time(model.DateReceived)"></div>
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Date Verified</div> 
+        <div class="col-sm-3 border-dark border-bottom" tal:content="python:view.to_localized_time(model.DateReceived)"></div>   
+        <div class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Date Published</div> 
+        <div class="col-sm-3 border-dark border-bottom" tal:content="python:view.to_localized_time(view.timestamp)"></div> 
    
-        <div tal:condition="batch" class="col-sm-3 font-weight-bold border border-light border-right-0 label" i18n:translate="">Client Batch ID</div>
-        <div tal:condition="batch" class="col-sm-3 border border-light border-left-0" tal:content="batch/ClientBatchID"></div>
    
-        <div class="col-sm-3 border border-light border-right-0 ">Client</div>
-        <div class="col-sm-3 border border-light border-left-0">Tamaki Winery</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Tank Number:</div>
-        <div class="col-sm-3 border border-light border-left-0">J10</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Blend ID:</div>
-        <div class="col-sm-3 border border-light border-left-0">BVSBLS B302 2018</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Specification:</div>
-        <div class="col-sm-3 border border-light border-left-0">BVSBLS B300 2018</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Data Received:</div>
-        <div class="col-sm-3 border border-light border-left-0">03/07/2019 14:32</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Date Verified:</div>
-        <div class="col-sm-3 border border-light border-left-0">04/07/2019 21:15</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Date Published:</div>
-        <div class="col-sm-3 border border-light border-left-0">04/07/2019 21:17</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Batch ID:</div>
-        <div class="col-sm-3 border border-light border-left-0">BAT-3243243</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Client Batch SID:</div>
-        <div class="col-sm-3 border border-light border-left-0">CBAT-3242343</div>
-        <div class="col-sm-3 border border-light border-right-0 ">Sample Type:</div>
-        <div class="col-sm-3 border border-light border-left-0">White Wine</div>  
-    </div>
-        
-        
-        
-        
-        
-        <table class="table table-sm table-condensed">
-         
-         
-          <tr tal:condition="batch">
-            <td class="label" i18n:translate="">Client Batch ID</td>
-            <td tal:content="batch/ClientBatchID"></td>
-          </tr>
-          <tr>
-            <td class="label" i18n:translate="">Client</td>
-            <td>
-              <a tal:attributes="href client/absolute_url"
-                 tal:content="client/Name"></a>
-            </td>
-          </tr>
-          <tr>
-            <td class="label" i18n:translate="">Client SID</td>
-            <td tal:content="model/ClientSampleID"></td>
-          </tr>
-          <tr>
-            <td class="label" i18n:translate="">Sample Type</td>
-            <td tal:content="model/SampleType/title|nothing"></td>
-          </tr>
-          <tr>
-            <td class="label" i18n:translate="">Specification</td>
-            <td tal:content="spec/contextual_title|nothing"></td>
-          </tr>
-          <tr>
-            <td class="label" i18n:translate="">Date Received</td>
-            <td tal:content="python:view.to_localized_time(model.DateReceived)"></td>
-          </tr>
-          <tr>
-            <td class="label" i18n:translate="">Date Verified</td>
-            <td tal:content="python:view.to_localized_time(model.get_transition_date('bika_ar_workflow', 'verified'))"></td>
-          </tr>
-          <tr>
-            <td class="label" i18n:translate="">Date Published</td>
-            <td tal:content="python:view.to_localized_time(view.timestamp)"></td>
-          </tr>
-          <tr tal:condition="reporter">
-            <td class="label" i18n:translate="">Published by</td>
-            <td>
-              <span tal:content="reporter/fullname|reporter/username"/>
+        <div tal:condition="reporter" class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Published by</div> 
+        <div class="col-sm-3 border-dark border-bottom"> <span tal:content="reporter/fullname|reporter/username"/>
               <tal:email tal:condition="reporter/email|nothing"
                          tal:define="email reporter/email|nothing">
                 (<a tal:content="email"
                     tal:attributes="href string:mailto:${email}"></a>)
-              </tal:email>
-            </td>
-          </tr>
-          <tr tal:condition="python: batch and batch.BatchLabels">
-            <td class="label" i18n:translate="">Batch Labels</td>
-            <td tal:content="structure python:', '.join(batch.BatchLabels)"></td>
-          </tr>
-        </table>
+              </tal:email></span>
+          
+   </div>       
+        <div tal:condition="python: batch and batch.BatchLabels" class="col-sm-3 font-weight-bold border-dark border-bottom label" i18n:translate="">Batch Labels</div> 
+        <div class="col-sm-3 border-dark border-bottom" tal:content="structure python:', '.join(batch.BatchLabels)"></div> 
+ 
+   
+   
+   
+    </div> 
+        
+
       </div>
     </div>
   </tal:render>
